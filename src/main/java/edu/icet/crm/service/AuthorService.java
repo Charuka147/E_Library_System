@@ -10,5 +10,5 @@ public interface AuthorService {
     List<AuthorEntity> getAllAuthor();
     void updateAuthor(AuthorEntity authorEntity);
     void deleteAuthor(Integer id);
-    Optional<AuthorEntity> searchAuthorById(Integer id);
+    AuthorEntity searchAuthorById(Integer id);
 }
