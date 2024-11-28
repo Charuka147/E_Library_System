@@ -2,8 +2,11 @@ package edu.icet.crm.controller;
 
 import edu.icet.crm.entity.AuthorEntity;
 import edu.icet.crm.entity.PublisherEntity;
+import edu.icet.crm.model.Book;
+import edu.icet.crm.model.Publisher;
 import edu.icet.crm.service.PublisherService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,24 +20,30 @@ public class PublisherController {
     final PublisherService publisherService;
 
     @PostMapping("/save-publisher")
-    public void savePublisher(@RequestBody PublisherEntity publisherEntity) {
-        publisherService.addPublisher(publisherEntity);
-        System.out.println(publisherEntity);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void savePublisher(@RequestBody Publisher publisher) {
+        publisherService.addPublisher(publisher);
+        System.out.println(publisher);
     }
     @GetMapping("/getAllPublisher")
-    public List<PublisherEntity> getAllPublisher()
+    public List<Publisher> getAllPublisher()
     {
         return publisherService.getAllPublisher();
     }
     @PutMapping("/update-publisher")
-    public void updatePublisher(@RequestPart("publisher") PublisherEntity publisherEntity)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updatePublisher(@RequestBody Publisher publisher)
     {
-        publisherService.updatePublisher(publisherEntity);
+        publisherService.updatePublisher(publisher);
     }
     @DeleteMapping(path = "/delete-publisher/{id}")
-    public void deletePublisher(@PathVariable(value = "id")Integer id)
-    {
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deletePublisher(@PathVariable Integer id) {
         publisherService.deleteAuthor(id);
+    }
+
+    @GetMapping("/search-publisher/{id}")
+    public Publisher getPublisherById(@PathVariable Integer id){
+        return publisherService.searchPublisherById(id);
     }
 }

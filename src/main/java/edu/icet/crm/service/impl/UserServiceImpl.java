@@ -1,32 +1,39 @@
 package edu.icet.crm.service.impl;
 
 import edu.icet.crm.entity.UserEntity;
+import edu.icet.crm.model.User;
 import edu.icet.crm.repository.UserRepository;
 import edu.icet.crm.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ModelMapper mapper;
     @Override
-    public void addUser(UserEntity userEntity) {
-        userRepository.save(userEntity);
+    public void addUser(User user) {
+        userRepository.save(mapper.map(user, UserEntity.class));
     }
 
     @Override
-    public List<UserEntity> getAllUser() {
-        return userRepository.findAll();
+    public List<User> getAllUser() {
+        List<User> userArrayList = new ArrayList<>();
+        userRepository.findAll().forEach(userentity -> {
+            userArrayList.add(mapper.map(userentity, User.class));
+        });
+        return userArrayList;
     }
 
     @Override
-    public void updateUser(UserEntity userEntity) {
-        userRepository.save(userEntity);
+    public void updateUser(User user) {
+        userRepository.save(mapper.map(user, UserEntity.class));
     }
 
     @Override
@@ -35,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserEntity> searchUserById(Integer id) {
-        return userRepository.findById(id);
+    public User searchUserById(Integer id) {
+        return mapper.map(userRepository.findById(id), User.class);
     }
 }

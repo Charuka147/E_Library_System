@@ -1,6 +1,5 @@
 package edu.icet.crm.controller;
 
-import edu.icet.crm.entity.AuthorEntity;
 import edu.icet.crm.model.Author;
 import edu.icet.crm.service.AuthorService;
 import lombok.RequiredArgsConstructor;
@@ -17,18 +16,17 @@ public class AuthorController {
     final AuthorService authorService;
     @PostMapping(path = "/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveAuthor(@RequestBody AuthorEntity authorEntity) {
-       authorService.addAuthor(authorEntity);
-        System.out.println(authorEntity);
+    public void saveAuthor(@RequestBody Author author) {
+       authorService.addAuthor(author);
     }
     @GetMapping("/getAllAuthor")
-    public List<AuthorEntity> getAllAuthor() {
+    public List<Author> getAllAuthor() {
         return authorService.getAllAuthor();
     }
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateAuthor(@RequestBody AuthorEntity authorEntity) {
-        authorService.updateAuthor(authorEntity);
+    public void updateAuthor(@RequestBody Author author) {
+        authorService.updateAuthor(author);
     }
     @DeleteMapping(path = "/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -36,7 +34,7 @@ public class AuthorController {
         authorService.deleteAuthor(id);
     }
     @GetMapping("/search/{id}")
-    public AuthorEntity getCustomerById(@PathVariable Integer id){
+    public Author getAuthorById(@PathVariable Integer id){
         return authorService.searchAuthorById(id);
     }
 

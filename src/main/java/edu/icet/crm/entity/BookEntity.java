@@ -14,12 +14,10 @@ import lombok.ToString;
 @Table(name="book")
 public class BookEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Integer bookId;
     @Column(name = "book_title")
     private String title;
-//    @ManyToMany
-//    @JoinColumn(name = "author_id")
-//    private AuthorEntity authorEntity;
+
 }

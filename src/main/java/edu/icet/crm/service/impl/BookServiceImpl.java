@@ -1,32 +1,41 @@
 package edu.icet.crm.service.impl;
 
 import edu.icet.crm.entity.BookEntity;
+import edu.icet.crm.model.Book;
 import edu.icet.crm.repository.BookRepository;
 import edu.icet.crm.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    final BookRepository bookRepository;
+    private final BookRepository bookRepository;
+    private final ModelMapper mapper;
     @Override
-    public void addBook(BookEntity bookEntity) {
-        bookRepository.save(bookEntity);
+    public void addBook(Book book) {
+
+        bookRepository.save(mapper.map(book, BookEntity.class));
     }
 
     @Override
-    public List<BookEntity> getAllBook() {
-        return bookRepository.findAll();
+    public List<Book> getAllBook() {
+        List<Book> bookArrayList = new ArrayList<>();
+        bookRepository.findAll().forEach(entityBook -> {
+            bookArrayList.add(mapper.map(entityBook, Book.class));
+        });
+        return bookArrayList;
     }
 
     @Override
-    public void updateBook(BookEntity bookEntity) {
-        bookRepository.save(bookEntity);
+    public void updateBook(Book book) {
+
+        bookRepository.save(mapper.map(book, BookEntity.class));
     }
 
     @Override
@@ -35,7 +44,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<BookEntity> searchBookById(Integer id) {
-        return bookRepository.findById(id);
+    public Book searchBookById(Integer id) {
+
+        return mapper.map(bookRepository.findById(id), Book.class);
     }
 }

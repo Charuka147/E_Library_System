@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,22 +19,22 @@ public class AuthorServiceImpl implements AuthorService {
     private final ModelMapper mapper;
 
     @Override
-    public void addAuthor(AuthorEntity authorEntity) {
-        authorRepository.save(mapper.map(authorEntity, AuthorEntity.class));
+    public void addAuthor(Author author) {
+        authorRepository.save(mapper.map(author, AuthorEntity.class));
     }
 
     @Override
-    public List<AuthorEntity> getAllAuthor() {
-        List<AuthorEntity> authorArrayList = new ArrayList<>();
-        authorRepository.findAll().forEach(authorEntity -> {
-            authorArrayList.add(mapper.map(authorEntity, AuthorEntity.class));
+    public List<Author> getAllAuthor() {
+        List<Author> authorArrayList = new ArrayList<>();
+        authorRepository.findAll().forEach(entity -> {
+            authorArrayList.add(mapper.map(entity, Author.class));
         });
         return authorArrayList;
     }
 
     @Override
-    public void updateAuthor(AuthorEntity authorEntity) {
-        authorRepository.save(mapper.map(authorEntity, AuthorEntity.class));
+    public void updateAuthor(Author author) {
+        authorRepository.save(mapper.map(author, AuthorEntity.class));
     }
 
     @Override
@@ -44,7 +43,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorEntity searchAuthorById(Integer id) {
-        return mapper.map(authorRepository.findById(id), AuthorEntity.class);
+    public Author searchAuthorById(Integer id) {
+        return mapper.map(authorRepository.findById(id), Author.class);
     }
 }

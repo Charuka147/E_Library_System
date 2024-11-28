@@ -1,32 +1,40 @@
 package edu.icet.crm.service.impl;
 
 import edu.icet.crm.entity.PublisherEntity;
+import edu.icet.crm.model.Publisher;
 import edu.icet.crm.repository.PublisherRepository;
 import edu.icet.crm.service.PublisherService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
 
-    final PublisherRepository publisherRepository;
+    private final PublisherRepository publisherRepository;
+    private final ModelMapper mapper;
     @Override
-    public void addPublisher(PublisherEntity publisherEntity) {
-        publisherRepository.save(publisherEntity);
+    public void addPublisher(Publisher publisher) {
+        publisherRepository.save(mapper.map(publisher, PublisherEntity.class));
     }
 
     @Override
-    public List<PublisherEntity> getAllPublisher() {
-        return publisherRepository.findAll();
+    public List<Publisher> getAllPublisher() {
+        List<Publisher> publisherArrayList = new ArrayList<>();
+        publisherRepository.findAll().forEach(publisherentity -> {
+            publisherArrayList.add(mapper.map(publisherentity, Publisher.class));
+        });
+        return publisherArrayList;
     }
 
     @Override
-    public void updatePublisher(PublisherEntity publisherEntity) {
-        publisherRepository.save(publisherEntity);
+    public void updatePublisher(Publisher publisher) {
+        publisherRepository.save(mapper.map(publisher, PublisherEntity.class));
     }
 
     @Override
@@ -35,7 +43,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public Optional<PublisherEntity> searchPublisherById(Integer id) {
-        return publisherRepository.findById(id);
+    public Publisher searchPublisherById(Integer id) {
+        return mapper.map(publisherRepository.findById(id), Publisher.class);
     }
 }

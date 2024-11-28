@@ -12,8 +12,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class Author {
-
     private Integer authorId;
-
     private String authorName;
 }

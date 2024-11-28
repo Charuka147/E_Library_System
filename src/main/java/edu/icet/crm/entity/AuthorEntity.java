@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.mapping.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +15,7 @@ import org.hibernate.mapping.Set;
 public class AuthorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
     private Integer authorId;
     @Column(name = "author_name")

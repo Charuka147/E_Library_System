@@ -18,21 +18,10 @@ public class BorrowEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "borrow_id")
     private Integer id;
-
-//    @ManyToOne
-//    @JoinColumn(name = "book_id")
-//    private BookEntity book;
-//
-//
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private UserEntity user;
-
-
-
+    @Column(name = "borrow_date")
     private LocalDate borrowDate;
-
-
+    @Column(name = "return_date")
     private LocalDate returnDate;
 }

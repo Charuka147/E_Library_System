@@ -1,14 +1,13 @@
 package edu.icet.crm.service;
 
-import edu.icet.crm.entity.AuthorEntity;
+import edu.icet.crm.model.Author;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AuthorService {
-    void addAuthor(AuthorEntity authorEntity);
-    List<AuthorEntity> getAllAuthor();
-    void updateAuthor(AuthorEntity authorEntity);
+    void addAuthor(Author author);
+    List<Author> getAllAuthor();
+    void updateAuthor(Author author);
     void deleteAuthor(Integer id);
-    AuthorEntity searchAuthorById(Integer id);
+    Author searchAuthorById(Integer id);
 }

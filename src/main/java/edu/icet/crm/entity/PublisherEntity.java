@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Set;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -21,6 +19,5 @@ public class PublisherEntity {
     private Integer publisherId;
     @Column(name = "publisher_name")
     private String publisherName;
-//    @OneToMany(mappedBy = "publisher")
-//    private Set<BookEntity> books;
+
 }
