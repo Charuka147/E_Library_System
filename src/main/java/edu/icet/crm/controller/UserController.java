@@ -1,7 +1,5 @@
 package edu.icet.crm.controller;
 
-import edu.icet.crm.entity.PublisherEntity;
-import edu.icet.crm.entity.UserEntity;
 import edu.icet.crm.model.User;
 import edu.icet.crm.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +20,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveUser(@RequestBody User user) {
         userService.addUser(user);
-        System.out.println(user);
     }
     @GetMapping("/getAllUser")
     public List<User> getAllUser()
