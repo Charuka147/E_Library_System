@@ -10,4 +10,5 @@ public interface UserService {
     void updateUser(User user);
     void deleteUser(Integer id);
     User searchUserById(Integer id);
+    boolean isValidPhoneNumber(String phoneNumber);
 }

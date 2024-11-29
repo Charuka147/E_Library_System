@@ -16,10 +16,7 @@ import java.time.LocalDate;
 public class Borrow {
 
     private Integer id;
-
     private LocalDate borrowDate;
-
     private LocalDate returnDate;
-
 
 }

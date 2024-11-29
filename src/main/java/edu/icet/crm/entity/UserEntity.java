@@ -22,6 +22,8 @@ public class UserEntity {
 
     @Column(name = "user_name", nullable = false, length = 100)
     private String userName;
+    @Column(name = "contact_number")
+    private String phoneNumber;
 
     @Column(name = "email", nullable = false, unique = true, length = 150)
     private String email;
